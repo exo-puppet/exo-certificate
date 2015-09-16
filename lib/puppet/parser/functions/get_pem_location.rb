@@ -10,5 +10,16 @@ Retreive the location of a pem file installed with a install_as_pem directive
   
   raise(ArgumentError, 'Must specify a certificate') unless name
     
-  return function_get_certificate_value( ["pem", name, "target"] ) 
+  dir = function_get_certificate_value( ["pem", name, "target_dir"] )
+  pem = function_get_certificate_value( ["pem", name, "pem_file_name"] )
+
+  if dir.empty?
+    raise(ArgumentError, "No certificate '#{name}' found")
+  end
+
+  if pem.empty? # default param value
+    pem = "#{name}.pem"
+  end
+
+  return "#{dir}/#{pem}"
 end

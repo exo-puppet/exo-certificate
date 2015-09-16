@@ -26,14 +26,15 @@ Minimal usage :
 ```
 certificate::install_as_pem { "my_cert" :
     certificate_name => "my_cert",
-    target  => "/tmp/wild.pem"
+    target_dir  => "/location"
   }
 ```
 Where :
 * **certificate** : the name of a certificate::declare definition
-* **target** : the target file where the certificate will be generated
+* **target_dir** : the target directory where the certificate will be generated
 
 You can also provide optional parameters :
+* **pem_file_name** : the name of the generated file, default *${name}.pem*
 * **ensure**  : *present* or *absent*, default *present*
 * **owner**   : The owner of the file, default *root*
 * **group**   : The group of the file, default *root*
@@ -76,7 +77,7 @@ For certificates installed with separate files :
 * **get_certificate_key_location**   : return the key file location
 * **get_certificate_chain_location** : return the CA chain file location
 
-## Full exemple
+## Full example
 
 ```
   certificate::declare { "my_cert" :
@@ -84,7 +85,7 @@ For certificates installed with separate files :
     key_file   => "puppet:///my_location/certificate.key",
     chain_file => "puppet:///my_location/certificate.chain", # Optional
   }
-  certificate::install_as_files { "my_cert" :
+  certificate::install_as_pem { "my_cert" :
     certificate_name => "my_cert",
     target_dir => "/location",
   }

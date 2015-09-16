@@ -1,0 +1,13 @@
+{
+  "name": "exo-certificate",
+  "version": "1.0.0",
+  "author": "eXo",
+  "license": "GPL-3.0",
+  "summary": "A module to manage ssl certificates",
+  "source": "git@github.com:exo-puppet/exo-certificate.git",
+  "project_page": "https://github.com/exo-puppet/exo-certificate",
+  "dependencies": [
+    { "name": "puppetlabs/stdlib", "version_requirement": ">=4.9.0" },
+    { "name": "puppetlabs/concat", "version_requirement": ">= 1.2.4" }
+  ]
+}

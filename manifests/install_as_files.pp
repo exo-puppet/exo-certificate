@@ -8,8 +8,6 @@ define certificate::install_as_files (
   $owner            = $certificate::params::default_owner,
   $group            = $certificate::params::default_group,
   $mode             = $certificate::params::default_mode,
-  $notify           = undef,
-  $require          = undef,
 ) {
   include certificate::params
 
@@ -27,8 +25,6 @@ define certificate::install_as_files (
     owner     => "${owner}",
     group     => "${group}",
     mode      => "${mode}",
-    notify    => $notify,
-    require   => $require,
   }
 
   file { "${target_dir}/${key_file_name}" :
@@ -37,8 +33,6 @@ define certificate::install_as_files (
     owner     => "${owner}",
     group     => "${group}",
     mode      => "${mode}",
-    notify    => $notify,
-    require   => $require,
   }
 
   if $chain_file != undef {
@@ -48,8 +42,6 @@ define certificate::install_as_files (
       owner     => "${owner}",
       group     => "${group}",
       mode      => "${mode}",
-      notify    => $notify,
-      require   => $require,
     }
   }
 }

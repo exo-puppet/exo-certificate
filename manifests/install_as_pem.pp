@@ -1,11 +1,11 @@
 define certificate::install_as_pem (
-  $ensure        = 'present',
-  $certificate_name,
+  $ensure           = 'present',
+  $certificate_name = "${name}",
   $target_dir,
-  $pem_file_name = "${name}.pem",
-  $owner         = $certificate::params::default_owner,
-  $group         = $certificate::params::default_group,
-  $mode          = $certificate::params::default_mode,
+  $pem_file_name    = "${name}.pem",
+  $owner            = $certificate::params::default_owner,
+  $group            = $certificate::params::default_group,
+  $mode             = $certificate::params::default_mode,
 ) {
   if ! defined( Certificate::Declare["${certificate_name}"] ) {
     fail("Certificate ${certificate_name} is not defined.")

@@ -1,6 +1,6 @@
 define certificate::install_as_files (
   $ensure           = 'present',
-  $certificate_name,
+  $certificate_name = "${name}",
   $target_dir,
   $cert_file_name   = "${name}.crt",
   $key_file_name    = "${name}.key",

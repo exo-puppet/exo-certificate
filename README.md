@@ -25,15 +25,14 @@ concatenated into one file in this order.
 Minimal usage :
 ```
 certificate::install_as_pem { "my_cert" :
-    certificate_name => "my_cert",
     target_dir  => "/location"
   }
 ```
 Where :
-* **certificate** : the name of a certificate::declare definition
 * **target_dir** : the target directory where the certificate will be generated
 
 You can also provide optional parameters :
+* **certificate_name** : the name of a certificate::declare definition, if not declare, it's the task name
 * **pem_file_name** : the name of the generated file, default *${name}.pem*
 * **ensure**  : *present* or *absent*, default *present*
 * **owner**   : The owner of the file, default *root*
@@ -48,24 +47,23 @@ The 3 files will be installed as this.
 Minimal usage :
 ```
   certificate::install_as_files { "my_cert" :
-    certificate_name => "my_cert",
     target_dir => "/location",
   }
 ```
 Where :
-* **certificate** : the name of a certificate::declare definition
 * **target_dir** : the target directory where the certificate files will be copied
 
 You can also provide optional parameters :
-* **ensure**          : *present* or *absent*, default *present*
-* **cert_file_name**  : The certificate file name, default *${name}.crt*
-* **key_file_name**   : The certificat key file name, default *${name}.key*
-* **chain_file_name** : The CA chain file name, default *${name}.chain*
-* **owner**           : The owner of the files, default *root*
-* **group**           : The group of the files, default *root* 
-* **mode**            : The permission applied to the files, default *644*
-* **notify**          : Any class to notify on update, none by default, example:  ` notify => Class['apache']]`
-* **require**         : Add a dependency on this definition, none by default, example : `require => [File["/location"]]`
+* **certificate_name** : the name of a certificate::declare definition, if not declare, it's the task name
+* **ensure**           : *present* or *absent*, default *present*
+* **cert_file_name**   : The certificate file name, default *${name}.crt*
+* **key_file_name**    : The certificat key file name, default *${name}.key*
+* **chain_file_name**  : The CA chain file name, default *${name}.chain*
+* **owner**            : The owner of the files, default *root*
+* **group**            : The group of the files, default *root* 
+* **mode**             : The permission applied to the files, default *644*
+* **notify**           : Any class to notify on update, none by default, example:  ` notify => Class['apache']]`
+* **require**          : Add a dependency on this definition, none by default, example : `require => [File["/location"]]`
 
 ### Reference an installed certificate
 
@@ -86,7 +84,6 @@ For certificates installed with separate files :
     chain_file => "puppet:///my_location/certificate.chain", # Optional
   }
   certificate::install_as_pem { "my_cert" :
-    certificate_name => "my_cert",
     target_dir => "/location",
   }
   

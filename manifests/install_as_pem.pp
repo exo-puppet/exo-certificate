@@ -19,7 +19,7 @@ define certificate::install_as_pem (
     ensure          => "${ensure}",
     path            => "${target_dir}/${pem_file_name}",
     owner           => "${owner}",
-    group           => "${owner}",
+    group           => "${group}",
     ensure_newline  => true,
     mode            => 640,
   }

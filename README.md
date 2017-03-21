@@ -60,7 +60,7 @@ You can also provide optional parameters :
 * **key_file_name**    : The certificat key file name, default *${name}.key*
 * **chain_file_name**  : The CA chain file name, default *${name}.chain*
 * **owner**            : The owner of the files, default *root*
-* **group**            : The group of the files, default *root* 
+* **group**            : The group of the files, default *root*
 * **mode**             : The permission applied to the files, default *644*
 * **notify**           : Any class to notify on update, none by default, example:  ` notify => Class['apache']]`
 * **require**          : Add a dependency on this definition, none by default, example : `require => [File["/location"]]`
@@ -86,12 +86,20 @@ For certificates installed with separate files :
   certificate::install_as_pem { "my_cert" :
     target_dir => "/location",
   }
-  
+
   $my_pem_file = get_pem_location("my_cert")
 ```
 Or in some template :
 ```
     PemFile=<%= scope_function_get_pem_location(["my_cert"]) %>
+```
+
+# Convert key from pkcs5 to pkcs8
+The pkcs8 version of the certificate key can be need by some tools like logstash.
+To create the pkcs8 file from the pkcs5 version :
+
+```
+openssl pkcs8 -topk8 -in mycert.key -out mycert.key.pkcs8 -nocrypt
 ```
 
 ## License
@@ -115,7 +123,7 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 
 ## Contact
 
-eXo platform - Software Factory Team 
+eXo platform - Software Factory Team
 mailto : <exo-swf@exoplatform.com>
 
 ## Support

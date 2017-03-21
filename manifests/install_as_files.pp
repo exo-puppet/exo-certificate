@@ -15,9 +15,10 @@ define certificate::install_as_files (
     fail("Certificate ${certificate_name} is not defined.")
   }
 
-  $key_file   = getparam(Certificate::Declare["${certificate_name}"], "key_file")
-  $cert_file  = getparam(Certificate::Declare["${certificate_name}"], "cert_file")
-  $chain_file = getparam(Certificate::Declare["${certificate_name}"], "chain_file")
+  $key_file         = getparam(Certificate::Declare["${certificate_name}"], "key_file")
+  $key_file_pkcs8   = getparam(Certificate::Declare["${certificate_name}"], "key_file")
+  $cert_file        = getparam(Certificate::Declare["${certificate_name}"], "cert_file")
+  $chain_file       = getparam(Certificate::Declare["${certificate_name}"], "chain_file")
 
   file { "${target_dir}/${cert_file_name}" :
     ensure    => "${ensure}",
@@ -30,6 +31,14 @@ define certificate::install_as_files (
   file { "${target_dir}/${key_file_name}" :
     ensure    => "${ensure}",
     source    => "${key_file}",
+    owner     => "${owner}",
+    group     => "${group}",
+    mode      => "${mode}",
+  }
+
+  file { "${target_dir}/${key_file_name}.pkcs8" :
+    ensure    => "${ensure}",
+    source    => "${key_file}.pkcs8",
     owner     => "${owner}",
     group     => "${group}",
     mode      => "${mode}",

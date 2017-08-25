@@ -21,7 +21,7 @@ define certificate::install_as_pem (
     owner           => "${owner}",
     group           => "${group}",
     ensure_newline  => true,
-    mode            => 640,
+    mode            => $mode,
   }
 
   concat::fragment { "${name}_cert" :
